@@ -1,0 +1,31 @@
+1、Thowable
+	Throwable 类是 Java 语言中所有错误或异常的超类。
+	只有当对象是此类（或其子类之一）的实例时，才能通过 Java 虚拟机或者 Java throw 语句抛出。
+	类似地，只有此类或其子类之一才可以是 catch 子句中的参数类型。
+	
+2、错误：Error
+	指示合理的应用程序不应该试图捕获的严重问题。
+	这种错误往往来源自 Java 底层，一旦发生这种错误，我们连减少损失的机会都没有。
+	
+3、异常：Exception
+	RuntimeException：运行时异常。
+	结论：RuntimeException 也是 Exception 的子类。
+		但是：如果一个异常是 Exception 的子类，但不是 RuntimeException 的子类，则成为“已检查子类”，需要异常处理。
+			如果一个异常是 Exception 的子类，也是 RuntimeException 的子类，则成为“未检查异常”。
+	
+4、异常的处理
+	① 抛出异常：throws. 自己不处理，谁用谁处理。
+	② try{...}catch(...){...}：自己处理，
+		当在 try 语句块中遇到异常，则被 catch 捕捉到。而异常一下的语句不再执行,执行 catch 块内的语句。
+	③ try{...}catch(...){...}finally{...}：finally语句块，无论是否出错，都将执行。
+	
+5、自定义异常
+	一般继承 RuntimeException。
+	
+	public class MyException extends RuntimeException {
+		public MyException(String message) {
+			super(message);
+		}
+	}
+	
+	
