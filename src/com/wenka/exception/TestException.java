@@ -28,12 +28,12 @@ public class TestException {
 		System.out.println("end...");
 	}
 
-	// java.lang.RuntimeException µÄ×ÓÀà
+	// java.lang.RuntimeException çš„å­ç±»
 	public static void method1() throws CannotRedoException {
 
 	}
 
-	// Ö±½ÓÊÇ Exception µÄ×ÓÀà
+	// ç›´æ¥æ˜¯ Exception çš„å­ç±»
 	public static void method2() throws JMException {
 
 	}

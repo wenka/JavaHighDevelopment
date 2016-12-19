@@ -12,14 +12,14 @@ public class MainTest {
 	/**
 	 * 
 	 * @param account
-	 *            ÕË»§Óà¶î
+	 *            è´¦æˆ·ä½™é¢
 	 * @param price
-	 *            ÉÌÆ·¼Û¸ñ
+	 *            å•†å“ä»·æ ¼
 	 */
 	public static void buy(double account, double price) {
 
 		if (account < price) {
-			throw new MyException("Óà¶î²»×ã£¡");
+			throw new MyException("ä½™é¢ä¸è¶³ï¼");
 		}
 
 	}

@@ -10,13 +10,13 @@ public class DoException {
 		// try {
 		// method1();
 		// } catch (ClassNotFoundException e) {
-		// System.out.println(e.getMessage());//ÏêÏ¸ÏûÏ¢×Ö·û´®
+		// System.out.println(e.getMessage());//è·å–é”™è¯¯ä¿¡æ¯
 		// System.out.println(e.toString());
 		// }
 
 	}
 
-	// Å×³öÒì³£
+	// æŠ›å‡ºå¼‚å¸¸
 	public static void method1() throws ClassNotFoundException {
 
 		Class<?> name = Class.forName("com.test.throwable.DoException2");
