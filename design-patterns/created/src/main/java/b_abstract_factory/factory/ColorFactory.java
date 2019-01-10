@@ -19,7 +19,7 @@ public class ColorFactory extends AbstractFactory {
     private static Map<String, Class> colorMap;
 
     static {
-        colorMap = new HashMap<>();
+        colorMap = new HashMap<String, Class>();
         colorMap.put("yellow", Yellow.class);
         colorMap.put("black", Black.class);
     }

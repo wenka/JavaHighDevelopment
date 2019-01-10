@@ -14,7 +14,7 @@ public class AnimalFactory {
     private static Map<String, Class> animalMap;
 
     static {
-        animalMap = new HashMap<>();
+        animalMap = new HashMap<String, Class>();
         animalMap.put("cat", Cat.class);
         animalMap.put("dog", Dog.class);
     }

@@ -17,7 +17,7 @@ public class Meal {
 
     public void addItem(Item item) {
         if (items == null) {
-            items = new LinkedList<>();
+            items = new LinkedList<Item>();
         }
         items.add(item);
     }
@@ -37,6 +37,7 @@ public class Meal {
         if (items == null || items.isEmpty()) {
             return;
         }
+
         for (Item item : items) {
             System.out.println(item.name() + ":[Packing=" + item.pack().pack() + ",Price=" + item.price() + "]");
         }

@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class PrototypeDemo {
 
-    private static final Map<String, Animal> animals = new HashMap<>();
+    private static final Map<String, Animal> animals = new HashMap<String, Animal>();
 
     static {
         Dog dog = new Dog();
