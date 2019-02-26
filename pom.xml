@@ -10,6 +10,8 @@
 
     <modules>
         <module>design-patterns</module>
+        <module>ssh</module>
+        <module>socket</module>
     </modules>
     <dependencies>
         <dependency>
