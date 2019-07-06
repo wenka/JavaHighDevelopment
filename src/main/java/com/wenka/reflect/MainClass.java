@@ -9,14 +9,14 @@ import org.junit.Test;
 
 public class MainClass {
 
-	// Í¨¹ıÒ»¸ö¶ÔÏó»ñµÃÍêÕûµÄ°üÃûºÍÀàÃû
+	// é€šè¿‡ä¸€ä¸ªå¯¹è±¡è·å¾—å®Œæ•´çš„åŒ…åå’Œç±»å
 	@Test
 	public void testGetClass() {
 		Demo demo = new Demo();
 		System.out.println(demo.getClass());
 	}
 
-	// »ñÈ¡ClassÀà¶ÔÏó
+	// è·å–Classç±»å¯¹è±¡
 	@Test
 	public void testGetInstance() throws ClassNotFoundException {
 		Class<?> demo1 = null;
@@ -29,19 +29,19 @@ public class MainClass {
 
 		demo3 = Demo.class;
 
-		System.out.println("demo1£º" + demo1);
-		System.out.println("demo2£º" + demo2);
-		System.out.println("demo3£º" + demo3);
+		System.out.println("demo1ï¼š" + demo1);
+		System.out.println("demo2ï¼š" + demo2);
+		System.out.println("demo3ï¼š" + demo3);
 	}
 
-	// Í¨¹ıÎŞ²Î µÄ¹¹Ôì·½·¨ÊµÀı»¯¶ÔÏó
+	// é€šè¿‡æ— å‚ çš„æ„é€ æ–¹æ³•å®ä¾‹åŒ–å¯¹è±¡
 	@Test
 	public void testGetInstance2() throws ClassNotFoundException {
 
 		Class<?> Demo = Class.forName("com.wenka.reflect.Person");
 
 		try {
-			// ±ØĞëÓĞÎŞ²ÎµÄ¹¹Ôì·½·¨
+			// å¿…é¡»æœ‰æ— å‚çš„æ„é€ æ–¹æ³•
 			Person person = (Person) Demo.newInstance();
 			person.setAge(20);
 			person.setName("A");
@@ -54,14 +54,14 @@ public class MainClass {
 
 	}
 
-	// Í¨¹ıÆäËûÓĞ²ÎµÄ¹¹Ôì·½·¨´´½¨ÊµÀı
+	// é€šè¿‡å…¶ä»–æœ‰å‚çš„æ„é€ æ–¹æ³•åˆ›å»ºå®ä¾‹
 	@Test
 	public void testGetInstance3() throws ClassNotFoundException {
 
 		Class<?> demo = Class.forName("com.wenka.reflect.Person");
 
-		// ·µ»ØÒ»¸ö°üº¬Ä³Ğ© Constructor ¶ÔÏóµÄÊı×é£¬
-		// ÕâĞ©¶ÔÏó·´Ó³´Ë Class ¶ÔÏóËù±íÊ¾µÄÀàµÄËùÓĞ¹«¹²¹¹Ôì·½·¨
+		// è¿”å›ä¸€ä¸ªåŒ…å«æŸäº› Constructor å¯¹è±¡çš„æ•°ç»„ï¼Œ
+		// è¿™äº›å¯¹è±¡åæ˜ æ­¤ Class å¯¹è±¡æ‰€è¡¨ç¤ºçš„ç±»çš„æ‰€æœ‰å…¬å…±æ„é€ æ–¹æ³•
 		Constructor<?>[] constructors = demo.getConstructors();
 		for (Constructor<?> constructor : constructors) {
 			System.out.println(constructor);
@@ -71,7 +71,7 @@ public class MainClass {
 			 */
 		}
 
-		// »ñÈ¡Ö¸¶¨µÄ¹¹Ôì·½·¨
+		// è·å–æŒ‡å®šçš„æ„é€ æ–¹æ³•
 		try {
 			Person person = (Person) demo.getConstructor(String.class).newInstance("wangwu");
 			System.out.println(person);
@@ -89,16 +89,16 @@ public class MainClass {
 			e.printStackTrace();
 		}
 
-		// ·µ»Ø Constructor ¶ÔÏóµÄÒ»¸öÊı×é£¬ÕâĞ©¶ÔÏó·´Ó³´Ë Class ¶ÔÏó±íÊ¾µÄÀàÉùÃ÷µÄËùÓĞ¹¹Ôì·½·¨¡£
+		// è¿”å› Constructor å¯¹è±¡çš„ä¸€ä¸ªæ•°ç»„ï¼Œè¿™äº›å¯¹è±¡åæ˜ æ­¤ Class å¯¹è±¡è¡¨ç¤ºçš„ç±»å£°æ˜çš„æ‰€æœ‰æ„é€ æ–¹æ³•ã€‚
 		Constructor<?>[] constructors2 = demo.getDeclaredConstructors();
 		for (Constructor<?> constructor : constructors2) {
 			System.out.println(constructor);
 		}
-		// Í¨¹ıË½ÓĞ¹¹Ôì·½·¨´´½¨ÊµÀı
+		// é€šè¿‡ç§æœ‰æ„é€ æ–¹æ³•åˆ›å»ºå®ä¾‹
 		try {
 			Constructor<?> constructor = demo.getDeclaredConstructor(Integer.class);
-			// ÖµÎª true ÔòÖ¸Ê¾·´ÉäµÄ¶ÔÏóÔÚÊ¹ÓÃÊ±Ó¦¸ÃÈ¡Ïû Java ÓïÑÔ·ÃÎÊ¼ì²é¡£
-			// ÖµÎª false ÔòÖ¸Ê¾·´ÉäµÄ¶ÔÏóÓ¦¸ÃÊµÊ© Java ÓïÑÔ·ÃÎÊ¼ì²é¡£
+			// å€¼ä¸º true åˆ™æŒ‡ç¤ºåå°„çš„å¯¹è±¡åœ¨ä½¿ç”¨æ—¶åº”è¯¥å–æ¶ˆ Java è¯­è¨€è®¿é—®æ£€æŸ¥ã€‚
+			// å€¼ä¸º false åˆ™æŒ‡ç¤ºåå°„çš„å¯¹è±¡åº”è¯¥å®æ–½ Java è¯­è¨€è®¿é—®æ£€æŸ¥ã€‚
 			constructor.setAccessible(true);
 			Object newInstance = constructor.newInstance(20);
 			System.out.println(newInstance);
@@ -117,23 +117,23 @@ public class MainClass {
 		}
 	}
 
-	// »ñÈ¡×Ö¶Î
+	// è·å–å­—æ®µ
 	@Test
 	public void testGetField() throws ClassNotFoundException {
 		Class<?> demo = Class.forName("com.wenka.reflect.Person");
-		// demo.getFields(); //»ñÈ¡·ÇË½ÓĞµÄ×Ö¶Î
-		Field[] fields = demo.getDeclaredFields();// »ñÈ¡ËùÓĞ×Ö¶Î
+		// demo.getFields(); //è·å–éç§æœ‰çš„å­—æ®µ
+		Field[] fields = demo.getDeclaredFields();// è·å–æ‰€æœ‰å­—æ®µ
 		for (Field field : fields) {
 			System.out.println(field);
 		}
 
-		// »ñÈ¡Ö¸¶¨×Ö¶Î
+		// è·å–æŒ‡å®šå­—æ®µ
 		try {
 			Field field = demo.getDeclaredField("age");
 			field.setAccessible(true);
 			Person person = new Person("AAAAAA");
 			System.out.println(person);
-			// field.set(obj, value);¸øÄ³¸ö¶ÔÏóµÄ´ËÊôĞÔÉèÖÃĞÂÖµ
+			// field.set(obj, value);ç»™æŸä¸ªå¯¹è±¡çš„æ­¤å±æ€§è®¾ç½®æ–°å€¼
 			field.set(person, 100);
 			System.out.println(person);
 		} catch (NoSuchFieldException e) {
@@ -147,12 +147,12 @@ public class MainClass {
 		}
 	}
 
-	// »ñÈ¡·½·¨
+	// è·å–æ–¹æ³•
 	@Test
 	public void testGetMethod() throws ClassNotFoundException {
 		Class<?> demo = Class.forName("com.wenka.reflect.Person");
 
-		// ·µ»Ø¼Ì³ĞµÃµ½µÄ·½·¨
+		// è¿”å›ç»§æ‰¿å¾—åˆ°çš„æ–¹æ³•
 		Method[] methods = demo.getMethods();
 		for (Method method : methods) {
 			System.out.println(method.getName());
@@ -160,13 +160,13 @@ public class MainClass {
 
 		System.out.println("-------------------------------");
 
-		// ·µ»Ø±¾ÀàµÄ·½·¨
+		// è¿”å›æœ¬ç±»çš„æ–¹æ³•
 		Method[] declaredMethods = demo.getDeclaredMethods();
 		for (Method method : declaredMethods) {
 			System.out.println(method.getName());
 		}
 
-		// »ñÈ¡Ö¸¶¨·½·¨
+		// è·å–æŒ‡å®šæ–¹æ³•
 		try {
 			Method work = demo.getDeclaredMethod("work", int.class);
 			System.out.println(work);
@@ -177,7 +177,7 @@ public class MainClass {
 			Method salary = demo.getDeclaredMethod("salary");
 			salary.setAccessible(true);
 			Object invoke = salary.invoke(person);
-			System.out.println("µÃµ½ÁË¹¤×Ê£º" + invoke);
+			System.out.println("å¾—åˆ°äº†å·¥èµ„ï¼š" + invoke);
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {

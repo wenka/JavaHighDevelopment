@@ -47,7 +47,7 @@ public class Person {
 
 	@SuppressWarnings("unused")
 	private void work(int hours) {
-		System.out.println(name + "¹¤×÷ÁË" + hours + "¸öĞ¡Ê±");
+		System.out.println(name + "å·¥ä½œäº†" + hours + "ä¸ªå°æ—¶");
 	}
 
 	@SuppressWarnings("unused")

@@ -4,7 +4,7 @@ public class BookFacadeImpl implements BookFacade {
 
 	@Override
 	public void addBook() {
-		System.out.println("增加图书的方法！");
+		System.out.println("澧炲姞鍥句功鐨勬柟娉曪紒");
 	}
 
 }

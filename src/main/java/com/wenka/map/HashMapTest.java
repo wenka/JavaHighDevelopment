@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created with IDEA
@@ -15,6 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * Description:
  */
 public class HashMapTest {
+
+//    private volatile
 
     @Test
     public void test() {
@@ -27,6 +30,10 @@ public class HashMapTest {
 
         Hashtable<Object, Object> objectObjectHashtable = new Hashtable<>();
         ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
+        String s = "";
+        ReentrantLock reentrantLock;
+
+
     }
 
     /**

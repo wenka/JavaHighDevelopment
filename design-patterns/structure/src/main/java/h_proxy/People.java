@@ -3,11 +3,10 @@ package h_proxy;
 /**
  * Created with IDEA
  * author:wenka wkwenka@gmail.com
- * Date:2019/01/21  下午 01:46
+ * Date:2019/07/06  上午 09:51
  * Description:
  */
-public interface File {
+public interface People {
 
-    void display();
-
+    void eat();
 }

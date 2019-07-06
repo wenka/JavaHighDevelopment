@@ -1,4 +1,4 @@
-package h_proxy;
+package h_proxy.static_;
 
 /**
  * Created with IDEA

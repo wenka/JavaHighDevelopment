@@ -1,7 +1,7 @@
 package com.wenka.proxy.staticproxy;
 
 /**
- * ÕâÊÇÒ»¸ö´úÀíÀà £¨ÔöÇ¿ CountImpl ÊµÏÖÀà£©
+ * è¿™æ˜¯ä¸€ä¸ªä»£ç†ç±» ï¼ˆå¢å¼º CountImpl å®ç°ç±»ï¼‰
  * 
  * @author wenka
  */
@@ -14,17 +14,17 @@ public class CountProxy {
 	}
 
 	public void queryCount() {
-		System.out.println("ÊÂÎñµ÷ÓÃÖ®Ç°....");
-		// µ÷ÓÃÎªÎ¯ÍĞÀàµÄ·½·¨
+		System.out.println("äº‹åŠ¡è°ƒç”¨ä¹‹å‰....");
+		// è°ƒç”¨ä¸ºå§”æ‰˜ç±»çš„æ–¹æ³•
 		count.queryCount();
-		System.out.println("ÊÂÎñµ÷ÓÃÖ®ºó....");
+		System.out.println("äº‹åŠ¡è°ƒç”¨ä¹‹å....");
 	}
 
 	public void updateCount() {
-		System.out.println("ÊÂÎñµ÷ÓÃÖ®Ç°....");
-		// µ÷ÓÃÎªÎ¯ÍĞÀàµÄ·½·¨
+		System.out.println("äº‹åŠ¡è°ƒç”¨ä¹‹å‰....");
+		// è°ƒç”¨ä¸ºå§”æ‰˜ç±»çš„æ–¹æ³•
 		count.updateCount();
-		System.out.println("ÊÂÎñµ÷ÓÃÖ®ºó....");
+		System.out.println("äº‹åŠ¡è°ƒç”¨ä¹‹å....");
 	}
 
 }

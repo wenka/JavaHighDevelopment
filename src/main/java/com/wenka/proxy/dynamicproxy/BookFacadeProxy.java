@@ -4,29 +4,32 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+/**
+ * JDK åŠ¨æ€ä»£ç†
+ */
 public class BookFacadeProxy implements InvocationHandler {
 
-	private Object target;
+    private Object target;
 
-	public Object bind(Object target) {
-		this.target = target;
-		// Òª°ó¶¨Ò»¸ö½Ó¿Ú
-		// Proxy.newProxyInstance(loader, interfaces, h);
-		return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
-	}
+    public Object bind(Object target) {
+        this.target = target;
+        // è¦ç»‘å®šä¸€ä¸ªæ¥å£
+        // Proxy.newProxyInstance(loader, interfaces, h);
+        return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
+    }
 
-	@Override
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		Object result = null;
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        Object result = null;
 
-		System.out.println("ÊÂÎñ¿ªÊ¼¡£¡£¡£");
+        System.out.println("äº‹åŠ¡å¼€å§‹ã€‚ã€‚ã€‚");
 
-		// method.invoke(obj, args)
-		method.invoke(target, args);
+        // method.invoke(obj, args)
+        method.invoke(target, args);
 
-		System.out.println("ÊÂÎñ½áÊø¡£¡£¡£");
+        System.out.println("äº‹åŠ¡ç»“æŸã€‚ã€‚ã€‚");
 
-		return result;
-	}
+        return result;
+    }
 
 }
