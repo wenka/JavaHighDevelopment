@@ -14,6 +14,7 @@
         <module>ssh</module>
         <module>socket</module>
         <module>nio</module>
+        <module>netty-study</module>
     </modules>
     <dependencies>
         <dependency>

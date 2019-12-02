@@ -18,10 +18,10 @@ public class Main3 {
 
 class Products{
 	static int maxSize = 10;
-	static Queue<Integer> products = new LinkedList<Integer>(); //²úÆ·¶ÓÁĞ
+	static Queue<Integer> products = new LinkedList<Integer>(); //äº§å“é˜Ÿåˆ—
 }
 
-//Éú²úÕß
+//ç”Ÿäº§è€…
 class Producter extends Thread{
 	
 	@Override
@@ -31,7 +31,7 @@ class Producter extends Thread{
 			synchronized (Products.class) {
 				
 				while (Products.products.size() == Products.maxSize) {
-					System.out.println("²Ö¿âÒÑ¾­ÂúÁË");
+					System.out.println("ä»“åº“å·²ç»æ»¡äº†");
 					try {
 						Products.class.wait();
 					} catch (InterruptedException e) {
@@ -43,7 +43,7 @@ class Producter extends Thread{
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				System.out.println(Thread.currentThread().getName() + "Éú²ú³öÀ´µÄ²úÆ·±àºÅ£º" + i);
+				System.out.println(Thread.currentThread().getName() + "ç”Ÿäº§å‡ºæ¥çš„äº§å“ç¼–å·ï¼š" + i);
 				Products.products.add(i);
 				i++;
 				Products.class.notifyAll();
@@ -53,14 +53,14 @@ class Producter extends Thread{
 	}
 }
 
-//Ïû·ÑÕß
+//æ¶ˆè´¹è€…
 class Consumer extends Thread{
 	@Override
 	public void run() {
 		while (true) {
 			synchronized (Products.class) {
 				while (Products.products.isEmpty()) {
-					System.out.println("²Ö¿âÎª¿Õ");
+					System.out.println("ä»“åº“ä¸ºç©º");
 					try {
 						Products.class.wait();
 					} catch (InterruptedException e) {
@@ -72,8 +72,8 @@ class Consumer extends Thread{
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				System.out.println(Thread.currentThread().getName() +"Ïû·ÑµÄ²úÆ·±àºÅ : " + Products.products.remove()); 
-				Products.class.notifyAll(); //»½ĞÑÉú²úÕßÏß³ÌÉú²ú²úÆ·
+				System.out.println(Thread.currentThread().getName() +"æ¶ˆè´¹çš„äº§å“ç¼–å· : " + Products.products.remove()); 
+				Products.class.notifyAll(); //å”¤é†’ç”Ÿäº§è€…çº¿ç¨‹ç”Ÿäº§äº§å“
 			}
 		}
 	}
