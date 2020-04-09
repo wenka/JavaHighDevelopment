@@ -15,6 +15,7 @@
         <module>socket</module>
         <module>nio</module>
         <module>netty-study</module>
+      <module>arithmetic</module>
     </modules>
     <dependencies>
         <dependency>
