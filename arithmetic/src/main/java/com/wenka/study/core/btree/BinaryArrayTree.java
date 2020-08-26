@@ -1,9 +1,6 @@
 package com.wenka.study.core.btree;
 
-import javafx.scene.layout.Pane;
-
 import java.util.Arrays;
-import java.util.Map;
 
 /**
  * Created with IDEA
@@ -17,16 +14,16 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
     /**
      * 树的所有结点
      */
-    private Object[] elements;
+    private transient TreeNode[] elements;
 
     private final static int DEFAULT_DEEP = 8;
 
     /**
      * 树的深度
      */
-    private int maxDeep;
+    private transient int maxDeep;
 
-    private int maxSize;
+    private transient int maxSize;
 
     /**
      * 当前位置
@@ -44,7 +41,7 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
         }
         this.maxDeep = deep;
         this.maxSize = (int) Math.pow(2, maxDeep) - 1;
-        elements = new Object[this.maxSize];
+        elements = new TreeNode[this.maxSize];
     }
 
 
@@ -53,11 +50,12 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
         if (this.size == this.maxSize) {
             this.grow();
         }
+        TreeNode treeNode = new TreeNode(t);
         int index = ++current;
-        T element = (T) this.elements[index];
-        this.elements[index] = t;
+        TreeNode node = this.elements[index];
+        this.elements[index] = treeNode;
         this.size++;
-        return element;
+        return node == null ? null : (T) node.value;
     }
 
     @Override
@@ -66,16 +64,20 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
             throw new IllegalArgumentException("Illegal index: " + index);
         }
         // 判断当前位置是否为 null
-        if (this.elements[index] == null) {
-            throw new IllegalArgumentException("current parent element's value is null!");
+        if (index >= this.size || this.elements[index] == null) {
+            throw new IllegalArgumentException("current parent element's value is empty!");
         }
         if (this.size == this.maxSize || 2 * index + 1 > this.maxSize) {
             this.grow();
         }
         int leftIndex = 2 * index + 1;
-        T element = (T) this.elements[leftIndex];
-        this.elements[leftIndex] = t;
-        return element;
+        TreeNode treeNode = new TreeNode(t);
+        TreeNode node = this.elements[leftIndex];
+        if (node == null) {
+            this.size++;
+        }
+        this.elements[leftIndex] = treeNode;
+        return node == null ? null : (T) node.value;
     }
 
     @Override
@@ -84,37 +86,56 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
             throw new IllegalArgumentException("Illegal index: " + index);
         }
         // 判断当前位置是否为 null
-        if (this.elements[index] == null) {
-            throw new IllegalArgumentException("current parent element's value is null!");
+        if (index >= this.size || this.elements[index] == null) {
+            throw new IllegalArgumentException("current parent element's value is empty!");
         }
         if (this.size == this.maxSize || 2 * index + 2 > this.maxSize) {
             this.grow();
         }
-        int leftIndex = 2 * index + 2;
-        T element = (T) this.elements[leftIndex];
-        this.elements[leftIndex] = t;
-        return element;
+        int rightIndex = 2 * index + 2;
+        TreeNode treeNode = new TreeNode(t);
+        TreeNode node = this.elements[rightIndex];
+        if (node == null) {
+            this.size++;
+        }
+        this.elements[rightIndex] = treeNode;
+        return node == null ? null : (T) node.value;
     }
 
 
     @Override
     public T delete(T t) {
+        TreeNode node = null;
         if (t == null) {
-            return null;
-        }
-        T e = null;
-        for (int i = 0; i < this.elements.length; i++) {
-            Object element = this.elements[i];
-            if (t.equals(element)) {
-                e = (T) this.elements[i];
-                this.elements[i] = null;
-                // 删除其左子树
-                this.delete(2 * i + 1);
-                // 删除其右子树
-                this.delete(2 * i + 2);
+            for (int i = 0; i < this.elements.length; i++) {
+                TreeNode element = this.elements[i];
+                if (element != null && element.value == t) {
+                    node = this.elements[i];
+                    this.elements[i] = null;
+                    // 删除其左子树
+                    this.delete(2 * i + 1);
+                    // 删除其右子树
+                    this.delete(2 * i + 2);
+                }
+            }
+        } else {
+            for (int i = 0; i < this.elements.length; i++) {
+                TreeNode element = this.elements[i];
+                if (element != null && t.equals(element.value)) {
+                    node = this.elements[i];
+                    this.elements[i] = null;
+                    // 删除其左子树
+                    this.delete(2 * i + 1);
+                    // 删除其右子树
+                    this.delete(2 * i + 2);
+                }
             }
         }
-        return e;
+
+        if (node != null) {
+            this.size--;
+        }
+        return node == null ? null : (T) node.value;
     }
 
     @Override
@@ -125,13 +146,16 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
         if (this.elements[index] == null) {
             return null;
         }
-        Object element = this.elements[index];
+        TreeNode node = this.elements[index];
         this.elements[index] = null;
         // 删除其左子树
         this.delete(2 * index + 1);
         // 删除其右子树
         this.delete(2 * index + 2);
-        return (T) element;
+        if (node != null) {
+            this.size--;
+        }
+        return node == null ? null : (T) node.value;
     }
 
     @Override
@@ -143,7 +167,7 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
     public T root() {
         if (this.size == 0)
             return null;
-        return (T) this.elements[0];
+        return (T) this.elements[0].value;
     }
 
     @Override
@@ -154,11 +178,21 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
             int beginIndex = (int) Math.pow(2, i) - 1;
             int endIndex = (int) Math.pow(2, i + 1) - 1;
             for (int j = beginIndex; j < endIndex; j++) {
-                sb.append(this.elements[j] + "\t");
+                sb.append(this.elements[j] == null ? "NIL\t" : this.elements[j].value + "\t");
             }
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public int size() {
+        return this.size;
+    }
+
+    @Override
+    public boolean isNil(int index) {
+        return index >= this.maxSize || this.elements[index] == null;
     }
 
     @Override
@@ -171,22 +205,45 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
         this.maxSize = (int) Math.pow(2, maxDeep) - 1;
         System.out.println("=====扩容=====");
         System.out.println("深度：" + this.maxDeep + ",最大容量：" + this.maxSize);
-        Object[] objects = new Object[this.maxSize];
+        TreeNode[] objects = new TreeNode[this.maxSize];
         System.arraycopy(elements, 0, objects, 0, this.size);
         this.elements = objects;
     }
 
+    static class TreeNode<T> {
+        T value;
+
+        TreeNode() {
+        }
+
+        TreeNode(T value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return "[" + value + "]";
+        }
+    }
 
     public static void main(String[] args) {
         BinaryArrayTree<Integer> binaryArrayTree = new BinaryArrayTree<>(3);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             binaryArrayTree.put(i);
         }
+        binaryArrayTree.put(null);
         System.out.println(binaryArrayTree.putLeft(3, -1));
-        System.out.println(binaryArrayTree.putLeft(17, 100));
-        System.out.println(binaryArrayTree.putRight(18, 10220));
+        System.out.println(binaryArrayTree.putLeft(8, -10));
+//        System.out.println(binaryArrayTree.putRight(18, 10220));
+        System.out.println(binaryArrayTree.printTree());
         System.out.println(binaryArrayTree.delete(Integer.valueOf(3)));
         System.out.println(binaryArrayTree.toString());
         System.out.println(binaryArrayTree.printTree());
+
+        System.out.println(binaryArrayTree.isNil(8));
+        System.out.println(binaryArrayTree.isNil(9));
+        System.out.println(binaryArrayTree.isNil(10));
+        System.out.println(binaryArrayTree.isNil(100));
+        System.out.println(binaryArrayTree.size());
     }
 }
