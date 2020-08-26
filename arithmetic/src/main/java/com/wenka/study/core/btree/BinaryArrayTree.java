@@ -171,21 +171,6 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
     }
 
     @Override
-    public String printTree() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < this.maxDeep; i++) {
-            // 遍历每一层
-            int beginIndex = (int) Math.pow(2, i) - 1;
-            int endIndex = (int) Math.pow(2, i + 1) - 1;
-            for (int j = beginIndex; j < endIndex; j++) {
-                sb.append(this.elements[j] == null ? "NIL\t" : this.elements[j].value + "\t");
-            }
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
-
-    @Override
     public int size() {
         return this.size;
     }
@@ -193,6 +178,42 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
     @Override
     public boolean isNil(int index) {
         return index >= this.maxSize || this.elements[index] == null;
+    }
+
+    /**
+     * 获取第<code>index</code>个节点
+     *
+     * @param index
+     * @return
+     */
+    @Override
+    public T get(int index) {
+        if (index >= this.maxSize) {
+            return null;
+        }
+        return this.elements[index] == null ? null : (T) this.elements[index].value;
+    }
+
+    /**
+     * 获取第<code>index</code>个节点的左子节点
+     *
+     * @param index
+     * @return
+     */
+    @Override
+    public T getLeft(int index) {
+        return this.get(2 * index + 1);
+    }
+
+    /**
+     * 获取第<code>index</code>个节点的右子节点
+     *
+     * @param index
+     * @return
+     */
+    @Override
+    public T getRight(int index) {
+        return this.get(2 * index + 2);
     }
 
     @Override
@@ -210,6 +231,21 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
         this.elements = objects;
     }
 
+    @Override
+    public String printTree() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.maxDeep; i++) {
+            // 遍历每一层
+            int beginIndex = (int) Math.pow(2, i) - 1;
+            int endIndex = (int) Math.pow(2, i + 1) - 1;
+            for (int j = beginIndex; j < endIndex; j++) {
+                sb.append(this.elements[j] == null ? "NIL\t" : this.elements[j].value + "\t");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     static class TreeNode<T> {
         T value;
 
@@ -224,26 +260,5 @@ public class BinaryArrayTree<T> implements AbstractTree<T> {
         public String toString() {
             return "[" + value + "]";
         }
-    }
-
-    public static void main(String[] args) {
-        BinaryArrayTree<Integer> binaryArrayTree = new BinaryArrayTree<>(3);
-        for (int i = 0; i < 10; i++) {
-            binaryArrayTree.put(i);
-        }
-        binaryArrayTree.put(null);
-        System.out.println(binaryArrayTree.putLeft(3, -1));
-        System.out.println(binaryArrayTree.putLeft(8, -10));
-//        System.out.println(binaryArrayTree.putRight(18, 10220));
-        System.out.println(binaryArrayTree.printTree());
-        System.out.println(binaryArrayTree.delete(Integer.valueOf(3)));
-        System.out.println(binaryArrayTree.toString());
-        System.out.println(binaryArrayTree.printTree());
-
-        System.out.println(binaryArrayTree.isNil(8));
-        System.out.println(binaryArrayTree.isNil(9));
-        System.out.println(binaryArrayTree.isNil(10));
-        System.out.println(binaryArrayTree.isNil(100));
-        System.out.println(binaryArrayTree.size());
     }
 }

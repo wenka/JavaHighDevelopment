@@ -66,13 +66,6 @@ public interface AbstractTree<T> {
     T root();
 
     /**
-     * 打印树状二叉树
-     *
-     * @return
-     */
-    String printTree();
-
-    /**
      * 返回二叉树元素数量
      *
      * @return
@@ -86,4 +79,37 @@ public interface AbstractTree<T> {
      * @return
      */
     boolean isNil(int index);
+
+    /**
+     * 获取第<code>index</code>个节点
+     *
+     * @param index
+     * @return
+     */
+    T get(int index);
+
+    /**
+     * 获取第<code>index</code>个节点的左子节点
+     *
+     * @param index
+     * @return
+     */
+    T getLeft(int index);
+
+    /**
+     * 获取第<code>index</code>个节点的右子节点
+     *
+     * @param index
+     * @return
+     */
+    T getRight(int index);
+
+
+    /**
+     * 打印树状二叉树
+     *
+     * @return
+     */
+    String printTree();
+
 }
