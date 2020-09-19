@@ -1,41 +1,83 @@
-import java.math.BigDecimal;
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
 import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
+import java.awt.*;
+import java.awt.event.*;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println("Hello World!");
 
-//        double a = 1234567890.0987654321;
-//        System.out.println(a);
-//        System.out.println(BigDecimal.valueOf(a).setScale(10,BigDecimal.ROUND_HALF_UP));
-//
-//        Object o = a;
-//        System.out.println(o instanceof Number);
-//        System.out.println(BigDecimal.valueOf((double)o));
-//
-//        List<Integer> ints = new ArrayList<>();
-//        List<String> collect = ints.stream().map(Main::toString).collect(Collectors.toList());
-//        List<String> collect2 = ints.stream().map(x->x.toString()).collect(Collectors.toList());
 
-        ConcurrentLinkedQueue<Integer> integers = new ConcurrentLinkedQueue<>();
-        for (int i = 0; i < 100; i++) {
-            integers.offer(i);
+
+    public static int print(int i) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (; ; ) {
+            String a = "i = " + i;
+            arrayList.add(a);
         }
-
-        List<Integer> integerList = new ArrayList<>();
-        while (integerList.size() < 50){
-            integerList.add(integers.poll());
-        }
-
-        System.out.println(integers);
-        System.out.println(integerList);
-
     }
 
-    public static String toString(Integer a) {
-        return String.valueOf(a);
+}
+
+class People {
+
+    private String name;
+
+    private int age;
+
+    public People() {
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj instanceof People) {
+
+            People people = (People) obj;
+
+            if (this.getName().equals(people.getName())
+                    && this.getAge() == this.getAge()
+            ) {
+                return true;
+            }
+        }
+        return result;
+    }
+
+    public People(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public People setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public People setAge(int age) {
+        this.age = age;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "People{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

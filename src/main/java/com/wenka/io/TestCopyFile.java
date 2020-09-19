@@ -31,8 +31,6 @@ public class TestCopyFile {
 		
 		inputStream.close();
 		outputStream.close();
-		
-		System.out.println("over");
 	}
 	
 }
