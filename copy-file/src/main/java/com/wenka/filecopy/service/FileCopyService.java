@@ -60,6 +60,7 @@ public class FileCopyService implements Runnable {
      */
     private boolean copyFile() {
         if (this.targetFile.exists()){
+            LogUtil.info("已拷贝，跳过该文件");
             return true;
         }
         boolean flag = false;

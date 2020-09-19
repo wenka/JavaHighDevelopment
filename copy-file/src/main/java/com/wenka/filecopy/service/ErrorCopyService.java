@@ -1,6 +1,7 @@
 package com.wenka.filecopy.service;
 
 import com.wenka.filecopy.config.SysConfig;
+import com.wenka.filecopy.log.LogUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,6 +38,7 @@ public class ErrorCopyService implements Runnable {
             while (!queue.isEmpty() || SysConfig.SYS_RUN.get()) {
                 while (!queue.isEmpty()) {
                     String poll = queue.poll();
+                    LogUtil.info(poll);
                     byte[] b = (poll + "\n").getBytes();
                     fos.write(b);
                 }
