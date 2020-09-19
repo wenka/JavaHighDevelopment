@@ -59,6 +59,9 @@ public class FileCopyService implements Runnable {
      * @return
      */
     private boolean copyFile() {
+        if (this.targetFile.exists()){
+            return true;
+        }
         boolean flag = false;
         try (
                 InputStream inputStream = new FileInputStream(file);
@@ -92,7 +95,6 @@ public class FileCopyService implements Runnable {
         // 进行拷贝
         if (this.copyFile()) {
             LogUtil.info(this.file.getAbsolutePath() + " 拷贝成功至 " + this.targetFile.getAbsolutePath());
-            SysConfig.WAITING.set(false);
         } else {
             LogUtil.error(this.file.getAbsolutePath() + " 拷贝失败！！");
             // 记录拷贝出错文件
@@ -102,5 +104,6 @@ public class FileCopyService implements Runnable {
                 e.printStackTrace();
             }
         }
+        SysConfig.WAITING.set(false);
     }
 }

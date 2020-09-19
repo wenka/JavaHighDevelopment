@@ -7,10 +7,7 @@ import com.wenka.filecopy.service.FileCopyService;
 import com.wenka.filecopy.thread.ThreadPoorService;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created with IDEA
@@ -47,10 +44,11 @@ public class FileCopyMain {
             if (ThreadPoorService.getActiveCount() == 0) {
                 //等待错误日志线程结束
                 SysConfig.SYS_RUN.set(false);
-                while (thread.getState() == Thread.State.TERMINATED) {
-                    LogUtil.info("程序结束！！！！！");
-                    System.exit(0);
+                while (thread.getState() != Thread.State.TERMINATED) {
+                    LogUtil.info("等待错误记录线程结束...");
                 }
+                LogUtil.info("程序结束！！！！！");
+                System.exit(0);
             }
             try {
                 System.out.println(thread.getState());

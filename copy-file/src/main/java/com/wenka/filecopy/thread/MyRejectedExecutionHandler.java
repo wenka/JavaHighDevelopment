@@ -18,5 +18,6 @@ public class MyRejectedExecutionHandler implements RejectedExecutionHandler {
     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
         System.out.println(">>>>>>>>>>>>>>>>>>>> 线程队列已经满员 <<<<<<<<<<<<<<<<<<<<");
         SysConfig.WAITING.set(true);
+        executor.execute(r);
     }
 }
