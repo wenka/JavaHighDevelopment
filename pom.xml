@@ -17,6 +17,7 @@
         <module>netty-study</module>
       <module>arithmetic</module>
       <module>copy-file</module>
+      <module>activiti</module>
     </modules>
     <dependencies>
         <dependency>
